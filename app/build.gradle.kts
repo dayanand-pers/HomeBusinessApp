@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.dagger.hilt.android")
+    kotlin("kapt")
 }
 
 android {
@@ -37,6 +39,14 @@ android {
     buildFeatures {
         compose = true
     }
+
+    testOptions {
+        unitTests.all {
+            // This line is CRITICAL to tell Gradle to use the JUnit 5 platform-based runner
+            it.useJUnitPlatform()
+        }
+    }
+
     
 }
 
@@ -68,5 +78,22 @@ dependencies {
 
     implementation(libs.countrycodepickercompose)
 
-    
+
+    debugImplementation("androidx.compose.ui:ui-tooling-preview:1.10.4")
+    // For general UI tooling and preview features
+    implementation("androidx.compose.ui:ui-tooling-preview:1.10.4")
+
+    implementation("com.google.dagger:hilt-android:2.56.2")
+    kapt("com.google.dagger:hilt-android-compiler:2.56.2")
+
+    // Activity KTX dependency for viewModels() delegate
+    implementation("androidx.activity:activity-ktx:1.9.0")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
+
+    // Optional: If you still have JUnit 4 tests in the same project
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.10.0")
+
+
 }
