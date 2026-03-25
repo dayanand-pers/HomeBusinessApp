@@ -15,6 +15,8 @@ fun main() : Unit = runBlocking {
             delay(1000)
 
         }
+        println("This is second message")
+
     }
 
 //    job.join()
