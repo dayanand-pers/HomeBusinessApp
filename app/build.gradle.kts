@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -94,6 +96,14 @@ dependencies {
 
     // Optional: If you still have JUnit 4 tests in the same project
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.10.0")
+
+    implementation("io.coil-kt.coil3:coil-compose:3.0.4")
+
+    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+
+    implementation( "androidx.paging:paging-runtime:3.1.1")
+    implementation( "androidx.paging:paging-compose:1.0.0-alpha17")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
 
 
 }

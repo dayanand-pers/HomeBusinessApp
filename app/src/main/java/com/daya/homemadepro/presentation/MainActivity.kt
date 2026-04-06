@@ -91,7 +91,7 @@ class MainActivity : ComponentActivity() {
 
             withoutCoRoutine()
 
-            LoginScreen(viewModel)
+            LoginScreen(viewModel, mContext)
 
             /*HomeMadeProTheme {
 

@@ -41,7 +41,7 @@ import com.rejowan.ccpc.Country
 import com.rejowan.ccpc.CountryCodePicker
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel) {
+fun LoginScreen(viewModel: LoginViewModel, mContext : Context) {
 
 
 
@@ -99,7 +99,10 @@ fun LoginScreen(viewModel: LoginViewModel) {
         Button(onClick = {
 
             Log.e("Tag ", "Email : $email and password : $password")
-            viewModel.updateUserNameAndPassword(email, password)
+//            viewModel.updateUserNameAndPassword(email, password)
+
+            val intentHome = Intent(mContext, HomeActivity::class.java)
+            startActivity(mContext, intentHome, null)
 
 
         }) {

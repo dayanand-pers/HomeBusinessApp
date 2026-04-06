@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daya.homemadepro.Di.DiAnalyticEvent
+import com.daya.homemadepro.data.modal.DataCompair
 import com.daya.homemadepro.data.modal.LoginRequestEncrypted
 import com.daya.homemadepro.data.modal.LoginRequestX
 import com.daya.homemadepro.domain.encryption.SecurityUtils
@@ -54,6 +55,7 @@ class LoginViewModel @Inject constructor(
 
 
     fun getSharedFlow(){
+
         viewModelScope.launch {
 
             repeat(10) {
@@ -121,6 +123,14 @@ class LoginViewModel @Inject constructor(
 
 
 //        getSharedFlow()
+
+        val dataObje = DataCompair("Android")
+        dataObje.age = 25
+        val dataObje2 = DataCompair("Android")
+        dataObje2.age = 12
+
+        Log.e("VAL", "Object comparison "+dataObje.equals(dataObje2))
+
 
         getStateFlow()
 
