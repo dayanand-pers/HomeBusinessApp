@@ -3,10 +3,14 @@ package com.daya.homemadepro.presentation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.daya.homemadepro.Di.DiAnalyticEvent
+import com.daya.homemadepro.data.modal.DataCompair
 import com.daya.homemadepro.data.modal.LoginRequestEncrypted
 import com.daya.homemadepro.data.modal.LoginRequestX
 import com.daya.homemadepro.domain.encryption.SecurityUtils
 import com.daya.homemadepro.domain.usecases.GetLoginResponseUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +27,10 @@ import org.json.JSONObject
 import java.io.UnsupportedEncodingException
 import java.util.UUID
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val diAnalyticEvent: DiAnalyticEvent
+) : ViewModel() {
 
 
     private val useCase : GetLoginResponseUseCase by lazy { GetLoginResponseUseCase() }
@@ -41,8 +48,14 @@ class LoginViewModel : ViewModel() {
 
     private val _query = MutableStateFlow("")
 
+    fun getAnalyticEvent(){
+        diAnalyticEvent.trackScrinview("Main Activity")
+
+    }
+
 
     fun getSharedFlow(){
+
         viewModelScope.launch {
 
             repeat(10) {
@@ -110,6 +123,14 @@ class LoginViewModel : ViewModel() {
 
 
 //        getSharedFlow()
+
+        val dataObje = DataCompair("Android")
+        dataObje.age = 25
+        val dataObje2 = DataCompair("Android")
+        dataObje2.age = 12
+
+        Log.e("VAL", "Object comparison "+dataObje.equals(dataObje2))
+
 
         getStateFlow()
 

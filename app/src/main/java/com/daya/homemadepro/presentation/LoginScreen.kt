@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
@@ -40,7 +41,7 @@ import com.rejowan.ccpc.Country
 import com.rejowan.ccpc.CountryCodePicker
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel) {
+fun LoginScreen(viewModel: LoginViewModel, mContext : Context) {
 
 
 
@@ -48,7 +49,7 @@ fun LoginScreen(viewModel: LoginViewModel) {
         mutableStateOf("")
     }
 
-    var password by remember {
+    var password by rememberSaveable {
         mutableStateOf("")
     }
 
@@ -98,7 +99,10 @@ fun LoginScreen(viewModel: LoginViewModel) {
         Button(onClick = {
 
             Log.e("Tag ", "Email : $email and password : $password")
-            viewModel.updateUserNameAndPassword(email, password)
+//            viewModel.updateUserNameAndPassword(email, password)
+
+            val intentHome = Intent(mContext, HomeActivity::class.java)
+            startActivity(mContext, intentHome, null)
 
 
         }) {

@@ -20,5 +20,6 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.daya.homemadepro", appContext.packageName)
+//        assertEquals(5, 4+4)
     }
 }

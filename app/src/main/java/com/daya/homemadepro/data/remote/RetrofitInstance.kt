@@ -1,6 +1,10 @@
 package com.daya.homemadepro.data.remote
 
 import android.util.Log
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,13 +12,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.security.KeyStore
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
+import javax.inject.Singleton
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 
+@Module
+@InstallIn(SingletonComponent::class)
 object RetrofitInstance {
 
+    @Provides
+    @Singleton
     fun getInstance() : Retrofit {
 
         val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
@@ -38,13 +47,16 @@ object RetrofitInstance {
 
         return Retrofit.Builder()
             .client(ohhttpClient)
-            .baseUrl("https://callapi.velapro.com/api/v1/")
+//            .baseUrl("https://callapi.velapro.com/api/v1/")
+            .baseUrl("https://pixabay.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
     }
 
 
+    @Provides
+    @Singleton
     fun getLoginApiService() : ApiService{
 
         Log.e("Retrofit", "API service called")

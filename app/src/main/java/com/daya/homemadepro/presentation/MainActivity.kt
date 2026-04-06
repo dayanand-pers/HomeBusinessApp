@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -18,6 +19,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import okhttp3.Dispatcher
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
 
@@ -28,6 +30,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        viewModel.getAnalyticEvent()
 
         /*lifecycleScope.launch {
 
@@ -42,6 +46,20 @@ class MainActivity : ComponentActivity() {
             viewModel.sharedflow.collectLatest{
                 Log.e("TAG", "Inside shared flow $it")
             }
+        }*/
+
+        /*val array = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+        for (ar in 0 until array.size) {
+            println(ar)
+        }
+
+        for (ar in array.indices) {
+            println(ar)
+        }
+
+        for (ar in array.size downTo 0) {
+            println(ar)
         }*/
 
         lifecycleScope.launch {
@@ -73,7 +91,7 @@ class MainActivity : ComponentActivity() {
 
             withoutCoRoutine()
 
-            LoginScreen(viewModel)
+            LoginScreen(viewModel, mContext)
 
             /*HomeMadeProTheme {
 
